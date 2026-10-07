@@ -1,18 +1,189 @@
-const navs=document.querySelectorAll('.nav');const pages=document.querySelectorAll('.page');const title=document.getElementById('pageTitle');
-const titles={dashboard:'Dashboard',calculator:'Carbon Calculator',reports:'ESG Reports',insights:'AI Insights'};
-function showPage(id){pages.forEach(p=>p.classList.toggle('active-page',p.id===id));navs.forEach(n=>n.classList.toggle('active',n.dataset.page===id));title.textContent=titles[id]||'Dashboard';window.scrollTo({top:0,behavior:'smooth'})}
-navs.forEach(n=>n.addEventListener('click',()=>showPage(n.dataset.page)));
-function calculate(){
- const electricity=+document.getElementById('electricity').value||0;
- const diesel=+document.getElementById('diesel').value||0;
- const petrol=+document.getElementById('petrol').value||0;
- const travel=+document.getElementById('travel').value||0;
- // Illustrative prototype factors only:
- const a=electricity*0.00070,b=diesel*0.00268,c=petrol*0.00231,d=travel*0.00017;
- const total=a+b+c+d;
- document.getElementById('calcResult').textContent=total.toFixed(2);
- document.getElementById('e1').textContent=a.toFixed(2);
- document.getElementById('e2').textContent=b.toFixed(2);
- document.getElementById('e3').textContent=c.toFixed(2);
- document.getElementById('e4').textContent=d.toFixed(2);
+/* ================= PAGE NAVIGATION ================= */
+
+const navButtons =
+    document.querySelectorAll("[data-page]");
+
+
+navButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const page =
+            button.getAttribute("data-page");
+
+        openPage(page);
+
+    });
+
+});
+
+
+function openPage(pageName) {
+
+    /* Hide all pages */
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    /* Show selected page */
+
+    const selectedPage =
+        document.getElementById(pageName);
+
+    if (selectedPage) {
+
+        selectedPage.classList.add("active");
+
+    }
+
+
+    /* Update navigation */
+
+    navButtons.forEach(button => {
+
+        const page =
+            button.getAttribute("data-page");
+
+        button.classList.toggle(
+            "active",
+            page === pageName
+        );
+
+    });
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
 }
+
+
+
+/* ================= CARBON CALCULATOR ================= */
+
+function calculateCarbon() {
+
+    const electricity =
+        Number(
+            document.getElementById("electricity").value
+        ) || 0;
+
+
+    const diesel =
+        Number(
+            document.getElementById("diesel").value
+        ) || 0;
+
+
+    const petrol =
+        Number(
+            document.getElementById("petrol").value
+        ) || 0;
+
+
+    const travel =
+        Number(
+            document.getElementById("travel").value
+        ) || 0;
+
+
+    /*
+        DEMO EMISSION FACTORS
+
+        Electricity:
+        0.00070 tCO2e / kWh
+
+        Diesel:
+        0.00268 tCO2e / L
+
+        Petrol:
+        0.00231 tCO2e / L
+
+        Travel:
+        0.00017 tCO2e / km
+    */
+
+
+    const electricityEmission =
+        electricity * 0.00070;
+
+
+    const dieselEmission =
+        diesel * 0.00268;
+
+
+    const petrolEmission =
+        petrol * 0.00231;
+
+
+    const travelEmission =
+        travel * 0.00017;
+
+
+    const total =
+        electricityEmission +
+        dieselEmission +
+        petrolEmission +
+        travelEmission;
+
+
+    document.getElementById(
+        "carbonResult"
+    ).innerText =
+        total.toFixed(2);
+
+
+    showToast(
+        "Carbon footprint calculated successfully"
+    );
+
+}
+
+
+
+/* ================= TOAST ================= */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.innerText =
+        message;
+
+
+    toast.style.display =
+        "block";
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(() => {
+
+            toast.style.display =
+                "none";
+
+        }, 2500);
+
+}
+
+
+
+/* ================= DEMO STARTUP LOG ================= */
+
+console.log(
+    "EcoLedger AI Prototype loaded successfully."
+);
