@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoLedger AI — Carbon & ESG SaaS Prototype</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">E</div><div><b>EcoLedger AI</b><small>Carbon & ESG</small></div></div>
+    <nav>
+      <button class="nav active" data-page="dashboard">◉ Dashboard</button>
+      <button class="nav" data-page="calculator">⌁ Carbon Calculator</button>
+      <button class="nav" data-page="reports">▤ ESG Reports</button>
+      <button class="nav" data-page="insights">✦ AI Insights</button>
+    </nav>
+    <div class="side-bottom">
+      <div class="plan"><small>Prototype Plan</small><strong>MSME Starter</strong><span>75% of monthly data entered</span><div class="progress"><i></i></div></div>
+      <button class="settings">⚙ Settings</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header>
+      <div><span class="eyebrow">SUSTAINABILITY COMMAND CENTER</span><h1 id="pageTitle">Dashboard</h1></div>
+      <div class="user"><span class="status"></span> Demo Company <b>SK</b></div>
+    </header>
+
+    <section id="dashboard" class="page active-page">
+      <div class="hero">
+        <div><span class="pill">AI-POWERED ESG PLATFORM</span><h2>Make your business<br><em>measurably greener.</em></h2><p>Track emissions, understand your carbon footprint and discover practical ways to reduce it.</p></div>
+        <div class="hero-ring"><strong id="heroTotal">12.84</strong><span>tCO₂e<br>this year</span></div>
+      </div>
+      <div class="cards">
+        <div class="card"><span>Total emissions</span><strong>12.84 <small>tCO₂e</small></strong><label class="down">↓ 8.4% vs last year</label></div>
+        <div class="card"><span>Energy emissions</span><strong>6.21 <small>tCO₂e</small></strong><label>48.4% of total</label></div>
+        <div class="card"><span>Transport emissions</span><strong>3.76 <small>tCO₂e</small></strong><label>29.3% of total</label></div>
+        <div class="card"><span>Data completeness</span><strong>75<small>%</small></strong><label>3 data sources pending</label></div>
+      </div>
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-head"><div><span class="eyebrow">EMISSIONS TREND</span><h3>Monthly footprint</h3></div><span class="select">2026 ▾</span></div>
+          <div class="chart"><div class="ylabels"><span>2.0</span><span>1.5</span><span>1.0</span><span>0.5</span><span>0</span></div><div class="bars">
+            <i style="height:44%"></i><i style="height:53%"></i><i style="height:39%"></i><i style="height:68%"></i><i style="height:56%"></i><i style="height:73%"></i><i style="height:61%"></i><i style="height:49%"></i><i style="height:42%"></i><i style="height:35%"></i><i style="height:31%"></i><i style="height:27%"></i>
+          </div></div>
+          <div class="months"><span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Dec</span></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div><span class="eyebrow">AI INSIGHT</span><h3>Biggest opportunity</h3></div><span class="spark">✦</span></div>
+          <div class="insight"><div class="insight-icon">⚡</div><div><h4>Optimize electricity usage</h4><p>Your electricity footprint is 22% higher than similar businesses. Shifting high-load operations to off-peak hours could reduce an estimated <b>1.1 tCO₂e/year</b>.</p><button onclick="showPage('insights')">View AI recommendations →</button></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculator" class="page">
+      <div class="section-intro"><span class="pill">CALCULATE</span><h2>Carbon Calculator</h2><p>Enter activity data to estimate your organization's Scope 1 & 2 footprint.</p></div>
+      <div class="calc-grid">
+        <div class="panel form-panel">
+          <div class="field"><label>Electricity consumption <span>kWh / month</span></label><input id="electricity" type="number" value="1200"></div>
+          <div class="field"><label>Diesel consumption <span>litres / month</span></label><input id="diesel" type="number" value="180"></div>
+          <div class="field"><label>Petrol consumption <span>litres / month</span></label><input id="petrol" type="number" value="70"></div>
+          <div class="field"><label>Business travel <span>km / month</span></label><input id="travel" type="number" value="500"></div>
+          <button class="primary" onclick="calculate()">Calculate footprint</button>
+          <small class="note">Prototype factors are illustrative and must be replaced with verified factors before production use.</small>
+        </div>
+        <div class="result-card"><span>ESTIMATED MONTHLY FOOTPRINT</span><strong id="calcResult">1.07</strong><small>tCO₂e</small><div class="breakdown"><div><span>Electricity</span><b id="e1">0.84</b></div><div><span>Diesel</span><b id="e2">0.48</b></div><div><span>Petrol</span><b id="e3">0.16</b></div><div><span>Travel</span><b id="e4">0.06</b></div></div></div>
+      </div>
+    </section>
+
+    <section id="reports" class="page">
+      <div class="section-intro"><span class="pill">REPORTING</span><h2>ESG Reports</h2><p>Generate a clean management-ready sustainability snapshot.</p></div>
+      <div class="panel report">
+        <div class="report-top"><div><div class="brand mini"><div class="logo">E</div><b>EcoLedger AI</b></div><h2>2026 Carbon Footprint Report</h2><p>Demo Company · FY 2026</p></div><button class="primary" onclick="alert('Prototype: PDF export would be connected here.')">Export PDF</button></div>
+        <div class="report-stats"><div><span>Total footprint</span><b>12.84 tCO₂e</b></div><div><span>Scope 1</span><b>5.22 tCO₂e</b></div><div><span>Scope 2</span><b>7.62 tCO₂e</b></div><div><span>YoY change</span><b class="down">−8.4%</b></div></div>
+        <div class="table"><div><b>Category</b><b>Activity</b><b>tCO₂e</b></div><div><span>Purchased electricity</span><span>14,400 kWh</span><b>8.41</b></div><div><span>Diesel</span><span>2,160 L</span><b>5.78</b></div><div><span>Business travel</span><span>6,000 km</span><b>0.72</b></div></div>
+      </div>
+    </section>
+
+    <section id="insights" class="page">
+      <div class="section-intro"><span class="pill">AI ASSISTANT</span><h2>AI Sustainability Insights</h2><p>Turn emissions data into practical next steps.</p></div>
+      <div class="recommendations">
+        <div class="rec"><span>01</span><div><h3>Reduce electricity demand</h3><p>Replace high-consumption lighting and schedule heavy equipment outside peak periods.</p><b>Potential impact · High</b></div></div>
+        <div class="rec"><span>02</span><div><h3>Review fleet efficiency</h3><p>Diesel is your largest Scope 1 source. Track vehicle-level mileage and maintenance.</p><b>Potential impact · High</b></div></div>
+        <div class="rec"><span>03</span><div><h3>Set a 12-month target</h3><p>A realistic first target is a 10% reduction in operational emissions with monthly tracking.</p><b>Potential impact · Medium</b></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
